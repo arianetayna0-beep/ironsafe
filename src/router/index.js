@@ -1,7 +1,13 @@
 // Importa o Vue Router
 import { createRouter, createWebHistory } from 'vue-router'
- 
+import { createApp } from 'vue'
 import Home from "../Views/Home.vue"
+import Cadastro from "../Views/Cadastro.vue"
+import Login from "../Views/Login.vue"
+import Relatorio from "../Views/Relatorio.vue"  
+import { useSupabase } from '../composable/UseSupabase.js'
+import { useRouter } from 'vue-router'
+import sidebar from '../components/sidebar.vue'
  
  
 // Define todas as rotas da aplicação
@@ -28,6 +34,12 @@ const routes = [
         name: 'Relatorio',
         alias: '/Relatorio',
         component: () => import('../Views/Relatorio.vue')
+    },
+    {
+        path: '/sidebar',
+        name: 'Sidebar',
+        alias: '/Sidebar',
+        component: () => import('../components/Sidebar.vue')
     },
 ]
  

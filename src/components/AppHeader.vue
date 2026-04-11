@@ -6,7 +6,7 @@
             <router-link class="link" to="/Sobre">Sobre</router-link>
         </div>
         <div class="buttons">
-            <button class="login-button" @click="router.push('/login')">Entrar</button>
+            <button class="login-button" @click="router.push('/Login')">Entrar</button>
             <button class="signup-button" @click="router.push('/cadastro')">Cadastrar-se</button>
             <i class="pi pi-align-justify" style="font-size: 2rem;"></i>
         </div>
@@ -33,10 +33,9 @@ export default {
     justify-content: space-evenly;
     width: 100%;
     height: 5rem;
+    background-color: white;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
 }
-
-
 
 .logo {
     display: flex;
