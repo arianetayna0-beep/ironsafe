@@ -14,7 +14,12 @@
 
         <RouterLink to="/app/cadastro" class="menu-item" active-class="active">
           <i class="fas fa-chart-bar"></i>
-          <span>Cadastro</span>
+          <span>Cadastro de EPIs</span>
+        </RouterLink>
+
+        <RouterLink to="/app/funcionarios" class="menu-item" active-class="active">
+          <i class="fas fa-chart-bar"></i>
+          <span>Cadastro de Funcionarios</span>
         </RouterLink>
 
         <RouterLink to="/app/entregas" class="menu-item" active-class="active">
@@ -40,15 +45,16 @@
     <h2>Sistema EPI</h2>
 
     <router-link to="/dashboard">Dashboard</router-link>
-    <router-link to="/cadastro">Cadastro</router-link>
-    <router-link to="/relatorio">Relatório</router-link>
-
+    <router-link to="/dashboard/cadastro">Cadastro de EPIs</router-link>
+        <router-link to="/dashboard/funcionario">Cadastro de Funcionarios</router-link>
+    <router-link to="/dashboard/relatorio">Relatório</router-link>
+    
     <button @click="logout">Sair</button>
   </div>
 </template>
 
 <script setup>
-import { useSupabase } from '../composable/useSupabase'
+import { useSupabase } from '../composables/useSupabase'
 import { useRouter } from 'vue-router'
 import { RouterLink, RouterView } from 'vue-router'
 const { supabase } = useSupabase()
@@ -80,7 +86,6 @@ function logout() {
 
 .shell {
   display: flex;
-  height: 100vh;
   background-color: #FFFFFF;
 }
 

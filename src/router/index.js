@@ -1,7 +1,6 @@
 // Importa o Vue Router
 import { createRouter, createWebHistory } from 'vue-router'
-import { useSupabase } from '../composable/useSupabase'
-import { createApp } from 'vue'
+import { useSupabase } from '../composables/useSupabase'
 import Home from "../Views/Home.vue"
 import Cadastro from "../Views/Cadastro.vue"
 import Login from "../Views/Login.vue"
@@ -10,7 +9,8 @@ import Dashboard from "../Views/Dashboard.vue"
 import Entregas from "../Views/Entregas.vue"
 import Funcionario from "../Views/Funcionario.vue"
 import sidebar from '../components/sidebar.vue'
- 
+import AppHeader from '../components/AppHeader.vue' 
+
 const { supabase } = useSupabase()
 
 // Define todas as rotas da aplicação
@@ -26,6 +26,7 @@ const routes = [
         alias: '/Cadastro',
         component: () => import('../Views/Cadastro.vue')
     },
+    
    {
         path: '/login',
         name: 'Login',
@@ -46,7 +47,6 @@ const routes = [
     }, 
      {
         path: '/dashboard',
-        name: 'dashboard',
         alias: '/Dashboard',
         component: Dashboard,
         meta: { requiresAuth: true },
