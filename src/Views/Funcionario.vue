@@ -1,6 +1,5 @@
 <template>
   <div class="layout-container">
-
     <header class="header-section">
       <h1>Cadastro de Funcionários</h1>
       <p>Gerencie os colaboradores cadastrados no sistema.</p>
@@ -13,7 +12,6 @@
         </div>
 
         <form @submit.prevent="salvar" class="main-form">
-
           <div class="form-row">
             <div class="form-group">
               <label>Nome Completo</label>
@@ -46,15 +44,6 @@
                 required
               />
             </div>
-
-            <div class="form-group">
-              <label>Senha</label>
-              <input
-                v-model="form.senha"
-                type="password"
-                placeholder="Digite a senha"
-              />
-            </div>
           </div>
 
           <div class="action-bar">
@@ -71,7 +60,6 @@
               Cancelar
             </button>
           </div>
-
         </form>
       </section>
 
@@ -93,27 +81,18 @@
               <td>{{ f.email }}</td>
 
               <td class="text-center">
-                <button
-                  @click="prepararEdicao(f)"
-                  class="btn-action edit"
-                >
+                <button @click="prepararEdicao(f)" class="btn-action edit">
                   Editar
                 </button>
-
-                <button
-                  @click="excluir(f.id)"
-                  class="btn-action delete"
-                >
+                <button @click="excluir(f.id)" class="btn-action delete">
                   Excluir
                 </button>
               </td>
             </tr>
           </tbody>
-
         </table>
       </section>
     </main>
-
   </div>
 </template>
 
@@ -128,15 +107,14 @@ const editandoId = ref(null);
 const form = reactive({
   nome: "",
   cpf: "",
-  email: "",
-  senha: ""
+  email: ""
 });
 
 const carregar = async () => {
   const { data, error } = await supabase
-    .from("funcionarios")
-    .select("*")
-    .order("nome");
+    .from('funcionarios')
+    .select('*')
+    .order('nome');
 
   if (error) {
     console.error("Erro ao carregar:", error.message);
@@ -146,27 +124,25 @@ const carregar = async () => {
 };
 
 const salvar = async () => {
+  const payload = {
+    nome: form.nome,
+    cpf: form.cpf,
+    email: form.email
+  };
+
   if (editandoId.value) {
-    await supabase
+    const { error } = await supabase
       .from("funcionarios")
-      .update({
-        nome: form.nome,
-        cpf: form.cpf,
-        email: form.email,
-        senha: form.senha
-      })
+      .update(payload)
       .eq("id", editandoId.value);
+    
+    if (error) alert("Erro ao atualizar: " + error.message);
   } else {
-    await supabase
-      .from("funcionarios")
-      .insert([
-        {
-          nome: form.nome,
-          cpf: form.cpf,
-          email: form.email,
-          senha: form.senha
-        }
-      ]);
+    const { error } = await supabase
+      .from('funcionarios')
+      .insert([payload]);
+    
+    if (error) alert("Erro ao cadastrar: " + error.message);
   }
 
   cancelarEdicao();
@@ -175,34 +151,31 @@ const salvar = async () => {
 
 const prepararEdicao = (f) => {
   editandoId.value = f.id;
-
   Object.assign(form, {
     nome: f.nome,
     cpf: f.cpf,
-    email: f.email,
-    senha: f.senha || ""
+    email: f.email
   });
 };
 
 const excluir = async (id) => {
   if (confirm("Deseja realmente excluir este funcionário?")) {
-    await supabase
-      .from("funcionarios")
+    const { error } = await supabase
+      .from('funcionarios')
       .delete()
       .eq("id", id);
 
+    if (error) alert("Erro ao excluir: " + error.message);
     carregar();
   }
 };
 
 const cancelarEdicao = () => {
   editandoId.value = null;
-
   Object.assign(form, {
     nome: "",
     cpf: "",
-    email: "",
-    senha: ""
+    email: ""
   });
 };
 
@@ -215,39 +188,29 @@ onMounted(carregar);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
   width: 100%;
-  height: auto;
+  padding: 20px;
 }
 
 .header-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: auto;
-  width: 100%;
   text-align: center;
   margin-bottom: 30px;
 }
 
 .content {
   width: 100%;
+  max-width: 900px;
   display: flex;
   flex-direction: column;
+  gap: 30px;
 }
 
-.card-form,
-.card-table {
-  width: 100%;
+.card-form, .card-table {
   background: #ffffff;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
+  padding: 20px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
-}
-
-.card-header {
-  border-bottom: 1px solid #e2e8f0;
 }
 
 .main-form {
@@ -259,7 +222,6 @@ onMounted(carregar);
 .form-row {
   display: flex;
   gap: 20px;
-  flex-wrap: wrap;
 }
 
 .form-group {
@@ -269,19 +231,51 @@ onMounted(carregar);
   gap: 8px;
 }
 
+.form-group input {
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+}
+
 .action-bar {
   display: flex;
   gap: 12px;
 }
 
-@media (max-width: 600px) {
-  .form-row {
-    flex-direction: column;
-  }
-
-  .action-bar {
-    flex-direction: column;
-  }
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
+.styled-table th, .styled-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.btn {
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  font-weight: 500;
+}
+
+.btn-primary { background: #2563eb; color: white; }
+.btn-outline { background: #f1f5f9; color: #475569; }
+
+.btn-action {
+  padding: 6px 12px;
+  margin: 0 4px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.edit { background: #fef3c7; color: #92400e; }
+.delete { background: #fee2e2; color: #b91c1c; }
+
+@media (max-width: 600px) {
+  .form-row { flex-direction: column; }
+}
 </style>

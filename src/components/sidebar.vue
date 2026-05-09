@@ -48,7 +48,7 @@
     <router-link to="/dashboard/cadastro">Cadastro de EPIs</router-link>
         <router-link to="/dashboard/funcionario">Cadastro de Funcionarios</router-link>
     <router-link to="/dashboard/relatorio">Relatório</router-link>
-    
+    <router-link to="/dashboard/entregas">Entregas</router-link>
     <button @click="logout">Sair</button>
   </div>
 </template>
