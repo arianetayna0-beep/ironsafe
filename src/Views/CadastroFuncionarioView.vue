@@ -120,17 +120,112 @@ onMounted(listar)
 </script>
 
 <style scoped>
-.pagina { padding: 2rem; display: flex; justify-content: center; background: #f4f7f6; min-height: 100vh; }
-.card { background: white; padding: 2rem; border-radius: 8px; width: 100%; max-width: 500px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-form { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
-input { padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px; }
-.erro { color: red; font-size: 0.8rem; }
-.botoes-form { display: flex; gap: 10px; }
-button { cursor: pointer; padding: 0.6rem 1rem; border-radius: 4px; border: none; font-weight: bold; }
-.btn-salvar { background: #28a745; color: white; flex: 1; }
-.btn-cancelar { background: #6c757d; color: white; }
-.tabela { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-.tabela th, .tabela td { border-bottom: 1px solid #eee; padding: 10px; text-align: left; }
-.btn-edit { background: #ffc107; margin-right: 5px; }
-.btn-del { background: #dc3545; color: white; }
+.pagina { 
+  padding: 2.5rem 1rem; 
+  display: flex; 
+  justify-content: center; 
+  background: #f5f5f5; /* Cinza claro neutro da imagem */
+  min-height: 100vh; 
+  font-family: 'Inter', sans-serif;
+}
+
+.card { 
+  background: #ffffff; /* Branco puro */
+  padding: 2rem; 
+  border-radius: 12px; 
+  width: 100%; 
+  max-width: 900px; /* Aumentado para acomodar bem a tabela */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); 
+  border: 1px solid #e0e0e0;
+}
+
+form { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 1.2rem; 
+  margin-bottom: 2.5rem; 
+}
+
+input { 
+  padding: 0.8rem 1rem; 
+  border: 1px solid #ced4da; 
+  border-radius: 8px; 
+  background: #ffffff;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+input:focus {
+  outline: none;
+  border-color: #f18f3c; /* Laranja no destaque */
+}
+
+.botoes-form { 
+  display: flex; 
+  gap: 12px; 
+}
+
+button { 
+  cursor: pointer; 
+  padding: 0.8rem 1.5rem; 
+  border-radius: 8px; 
+  border: none; 
+  font-weight: 600; 
+  font-size: 0.9rem;
+  transition: opacity 0.2s;
+}
+
+/* Botão Principal em Cinza Grafite */
+.btn-salvar { 
+  background: #6c757d; 
+  color: white; 
+  flex: 1; 
+}
+
+/* Botão Cancelar em Cinza mais suave */
+.btn-cancelar { 
+  background: #adb5bd; 
+  color: white; 
+}
+
+/* Estilo da Tabela */
+.tabela { 
+  width: 100%; 
+  border-collapse: collapse; 
+  margin-top: 1rem; 
+}
+
+.tabela th {
+  color: #888888;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 12px;
+  border-bottom: 2px solid #f2f2f2;
+  text-align: left;
+}
+
+.tabela td { 
+  border-bottom: 1px solid #f2f2f2; 
+  padding: 14px 12px; 
+  color: #333333;
+  font-size: 0.95rem;
+}
+
+/* Botão Editar (Laranja Pastel) */
+.btn-edit { 
+  background: #ffcc80; 
+  color: #855000; 
+  margin-right: 5px; 
+}
+
+/* Botão Excluir (Cinza Grafite para manter o padrão) */
+.btn-del { 
+  background: #6c757d; 
+  color: white; 
+}
+
+button:hover {
+  opacity: 0.9;
+}
 </style>

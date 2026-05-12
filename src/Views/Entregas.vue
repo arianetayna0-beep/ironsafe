@@ -163,17 +163,122 @@ onMounted(carregarTudo);
 </script>
 
 <style scoped>
-.layout-container { background: #f1f5f9; min-height: 100vh; padding: 2rem; font-family: sans-serif; }
-.content { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 2rem; }
-.card-form, .card-table { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
-.form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem; }
-.form-group { display: flex; flex-direction: column; gap: 0.5rem; }
-.form-group label { font-weight: bold; color: #475569; }
-.form-group input, .form-group select { padding: 0.6rem; border: 1px solid #cbd5e1; border-radius: 8px; }
-.btn-primary { background: #3b82f6; color: white; border: none; padding: 0.8rem; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; }
-.btn-primary:disabled { background: #94a3b8; cursor: not-allowed; }
-.styled-table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
-.styled-table th, .styled-table td { padding: 1rem; text-align: left; border-bottom: 1px solid #e2e8f0; }
-.badge-qtd-out { background: #fee2e2; color: #991b1b; padding: 0.2rem 0.6rem; border-radius: 10px; font-weight: bold; }
-.error-msg { color: #dc2626; font-weight: bold; margin-top: 1rem; }
+.layout-container {
+  background: #f4f5f7;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+}
+.content {
+  width: min(100%, 900px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.card-form, .card-table {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 22px 50px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+.card-form {
+  position: relative;
+}
+.card-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, rgba(241,143,60,0.18) 0%, transparent 70%);
+  border-bottom-left-radius: 40px;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.form-group label {
+  font-weight: 700;
+  color: #475569;
+}
+.form-group input,
+.form-group select {
+  padding: 0.95rem 1rem;
+  border: 1px solid #d6d9e6;
+  border-radius: 14px;
+  background: #f8fafc;
+  color: #111111;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.95rem 1.6rem;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-primary {
+  background: var(--primary);
+  color: #111111;
+  width: 100%;
+  box-shadow: 0 16px 30px rgba(241, 143, 60, 0.15);
+}
+.btn-primary:hover {
+  background: var(--primary-dark);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+.btn-primary:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+.styled-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 1rem;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+}
+.styled-table thead {
+  background: #f8fafc;
+}
+.styled-table th,
+.styled-table td {
+  padding: 1rem 1.2rem;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+.styled-table tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+.badge-qtd-out {
+  background: rgba(241, 143, 60, 0.12);
+  color: #a45100;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-weight: 700;
+}
+.error-msg {
+  color: #b91c1c;
+  font-weight: 700;
+  margin-top: 1rem;
+}
+@media (max-width: 768px) {
+  .layout-container { padding: 1.5rem 1rem; }
+}
 </style>

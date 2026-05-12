@@ -6,13 +6,16 @@
 
 <style scoped>
 .dashboard {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
-  height: auto;
+  height: 100%;
+  background-color: #f8f9fa;
 }
 
+@media (max-width: 768px) {
+  .dashboard {
+    padding-bottom: 60px;
+  }
+}
 </style>
 
 <script setup>

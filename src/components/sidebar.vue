@@ -6,50 +6,16 @@
         <i class="fas fa-shield-alt"></i>
         Sistema EPI
       </h1>
-      <nav class="menu">
-        <RouterLink to="/app/funcionarios" class="menu-item" active-class="active">
-          <i class="fas fa-users"></i>
-          <span>Funcionários</span>
-        </RouterLink>
-
-        <RouterLink to="/app/cadastro" class="menu-item" active-class="active">
-          <i class="fas fa-chart-bar"></i>
-          <span>Cadastro de EPIs</span>
-        </RouterLink>
-
-        <RouterLink to="/app/funcionarios" class="menu-item" active-class="active">
-          <i class="fas fa-chart-bar"></i>
-          <span>Cadastro de Funcionarios</span>
-        </RouterLink>
-
-        <RouterLink to="/app/entregas" class="menu-item" active-class="active">
-          <i class="fas fa-box"></i>
-          <span>Entregas de EPI</span>
-        </RouterLink>
-
-        <RouterLink to="/app/relatorio" class="menu-item" active-class="active">
-          <i class="fas fa-chart-bar"></i>
-          <span>Relatório</span>
-        </RouterLink>
-      </nav>
-      <button @click="sair" class="botao-sair">
-        <i class="fas fa-sign-out-alt"></i>
-        <span>Sair</span>
-      </button>
-    </aside>
-  </div>
-  <main class="conteudo">
-    <RouterView />
-  </main>
-  <div class="sidebar">
-    <h2>Sistema EPI</h2>
-
-    <router-link to="/dashboard">Dashboard</router-link>
+      <!-- Menu de navegação -->
     <router-link to="/dashboard/cadastro">Cadastro de EPIs</router-link>
-        <router-link to="/dashboard/funcionario">Cadastro de Funcionarios</router-link>
+    <router-link to="/dashboard/funcionario">Cadastro de Funcionarios</router-link>
     <router-link to="/dashboard/relatorio">Relatório</router-link>
     <router-link to="/dashboard/entregas">Entregas</router-link>
     <button @click="logout">Sair</button>
+    </aside>
+    <main class="conteudo">
+      <router-view />
+    </main>
   </div>
 </template>
 
@@ -86,12 +52,13 @@ function logout() {
 
 .shell {
   display: flex;
-  background-color: #FFFFFF;
+  background-color: #f8f9fa;
+  min-height: 100vh;
 }
 
 .sidebar {
-  width: 250px;
-  background-color: #d14e09;
+  width: 260px;
+  background: linear-gradient(135deg, #f18f3c 0%, #d16b27 100%);
   color: #FFFFFF;
   display: flex;
   flex-direction: column;
@@ -99,13 +66,27 @@ function logout() {
   height: 100vh;
   left: 0;
   top: 0;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
   z-index: 1000;
   overflow-y: auto;
+  padding: 20px 0;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
 }
 
 .logo {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
   color: #FFFFFF;
   margin-bottom: 40px;
@@ -114,128 +95,140 @@ function logout() {
   align-items: center;
   justify-content: center;
   gap: 10px;
+  padding: 0 15px;
+  flex-shrink: 0;
 }
 
 .logo i {
   font-size: 28px;
 }
 
-.menu {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.menu-item {
+a, button {
   display: flex;
   align-items: center;
-  padding: 15px 20px;
+  padding: 14px 20px;
   color: #FFFFFF;
   text-decoration: none;
-  border-radius: 4px;
-  font-size: 16px;
+  border-radius: 0;
+  font-size: 15px;
   cursor: pointer;
   transition: all 0.3s ease;
-  gap: 12px;
-
-}
-
-.menu-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.menu-item.active {
-  background-color: rgba(255, 255, 255, 0.2);
-  font-weight: 600;
-  border-left: 4px solid #FFFFFF;
-  padding-left: 16px;
-
-}
-
-.menu-item i {
-  font-size: 20px;
-  width: 24px;
-  text-align: center;
-}
-
-.botao-sair {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background-color: rgba(255, 255, 255, 0.1);
-  /* Fundo branco translúcido */
-  color: #FFFFFF;
   border: none;
-  padding: 12px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
-  transition: all 0.3s ease;
+  background: none;
   width: 100%;
+  text-align: left;
+  gap: 12px;
+  font-weight: 500;
 }
 
-.botao-sair:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-
+a:hover, button:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  padding-left: 24px;
 }
 
-
-.botao-sair:active {
-  transform: scale(0.98);
+a.router-link-active {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-left: 3px solid #FFFFFF;
+  padding-left: 17px;
+  font-weight: 600;
 }
 
-.botao-sair i {
-  font-size: 18px;
+button {
+  margin-top: auto;
+  background-color: rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0;
+  margin: auto 0 0 0;
+}
+
+button:hover {
+  background-color: rgba(255, 255, 255, 0.18);
 }
 
 .conteudo {
-  flex-grow: 1;
-  margin-left: 250px;
+  flex: 1;
+  margin-left: 260px;
   padding: 30px;
-  overflow-y: auto;
-  background-color: #FFFFFF;
+  background-color: #f8f9fa;
 }
 
-@media (max-width: 768px) {
-
+/* Tablet */
+@media (max-width: 1024px) {
   .sidebar {
-    width: 200px;
-
+    width: 240px;
   }
 
   .conteudo {
-    margin-left: 200px;
-
+    margin-left: 240px;
     padding: 20px;
-
-  }
-
-  .logo {
-    font-size: 20px;
-    margin-bottom: 30px;
-  }
-
-  .menu-item {
-    padding: 12px 15px;
-    font-size: 14px;
   }
 }
 
-
-@media (max-width: 480px) {
+/* Mobile */
+@media (max-width: 768px) {
+  .shell {
+    flex-direction: column;
+  }
 
   .sidebar {
     width: 100%;
-    position: absolute;
     height: auto;
+    position: fixed;
+    bottom: 0;
+    top: auto;
+    left: 0;
+    right: 0;
+    flex-direction: row;
+    box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.15);
+    padding: 10px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  .logo {
+    display: none;
+  }
+
+  a, button {
+    padding: 12px 15px;
+    font-size: 14px;
+    white-space: nowrap;
+  }
+
+  a:hover, button:hover {
+    padding-left: 15px;
+  }
+
+  a.router-link-active {
+    border-left: none;
+    border-bottom: 3px solid #FFFFFF;
+    padding-left: 15px;
   }
 
   .conteudo {
     margin-left: 0;
+    margin-bottom: 60px;
     padding: 15px;
+  }
+
+  button {
+    border-top: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .conteudo {
+    padding: 12px;
+    margin-bottom: 55px;
+  }
+
+  a, button {
+    padding: 10px 12px;
+    font-size: 13px;
   }
 }
 </style>

@@ -105,23 +105,119 @@ onMounted(carregar);
 </script>
 
 <style>
-.layout-container { background: #f1f5f9; min-height: 100vh; padding: 2rem; font-family: 'Inter', sans-serif; }
-.content { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 2rem; }
-.card-form, .card-table { background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; }
-.form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 1rem; }
-.form-group { display: flex; flex-direction: column; gap: 0.5rem; }
-.form-group label { font-weight: 600; color: #475569; font-size: 0.9rem; }
-.form-group input, .form-group select { padding: 0.7rem; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 1rem; }
-.btn { padding: 0.8rem 1.5rem; border-radius: 8px; border: none; cursor: pointer; font-weight: bold; transition: 0.2s; }
-.btn-primary { background: #3b82f6; color: white; }
-.btn-primary:hover { background: #2563eb; }
-.btn-outline { background: #f8fafc; border: 1px solid #cbd5e1; color: #64748b; }
-.styled-table { width: 100%; border-collapse: collapse; }
-.styled-table th { text-align: left; padding: 1rem; background: #f8fafc; color: #64748b; font-size: 0.8rem; text-transform: uppercase; }
-.styled-table td { padding: 1rem; border-bottom: 1px solid #f1f5f9; }
-.badge-qtd { background: #dcfce7; color: #166534; padding: 0.3rem 0.7rem; border-radius: 20px; font-weight: bold; }
-.badge-qtd-out { background: #fee2e2; color: #991b1b; padding: 0.3rem 0.7rem; border-radius: 20px; font-weight: bold; }
-.btn-action { padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; border: none; margin: 0 0.2rem; }
-.edit { background: #fef9c3; color: #854d0e; }
-.delete { background: #fee2e2; color: #991b1b; }
+:root {
+  --primary-orange: #f18f3c;
+  --btn-edit: #ffcc80;      /* Laranja claro da foto */
+  --btn-dark: #6c757d;      /* Cinza neutro da foto */
+  --bg-site: #f5f5f5;       /* Fundo cinza claro neutro */
+  --text-main: #333333;
+}
+
+.layout-container {
+  background: var(--bg-site);
+  min-height: 100vh;
+  padding: 2.5rem 1rem;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+.content {
+  width: min(100%, 1000px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Cards em Branco Puro */
+.card-form,
+.card-table {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e0e0e0;
+}
+
+.card-header h3 {
+  margin: 0 0 1.5rem;
+  color: var(--text-main);
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+/* Inputs com Fundo Branco */
+.form-group input,
+.form-group select {
+  padding: 0.8rem 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  background: #ffffff;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary-orange);
+}
+
+/* Botão de Cadastro em Cinza Neutro */
+.btn-primary {
+  background: var(--btn-dark);
+  color: #ffffff;
+  height: 3.2rem;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Tabela Limpa */
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.styled-table th {
+  text-align: left;
+  padding: 1rem;
+  color: #888888;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid #f2f2f2;
+}
+
+.styled-table td {
+  padding: 1.2rem 1rem;
+  border-bottom: 1px solid #f2f2f2;
+  color: var(--text-main);
+}
+
+/* Botões de Ação Idênticos à Foto */
+.btn-action {
+  padding: 0.6rem 1.4rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.edit { 
+  background: var(--btn-edit); 
+  color: #855000; 
+}
+
+.delete { 
+  background: var(--btn-dark); 
+  color: #ffffff; 
+}
+
+.btn-action:hover {
+  opacity: 0.9;
+}
 </style>

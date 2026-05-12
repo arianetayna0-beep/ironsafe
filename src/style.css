@@ -1,7 +1,113 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-*{
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family:"Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif;
+}
+
+:root {
+  --primary: #f18f3c;
+  --primary-dark: #d16b27;
+  --primary-soft: #fbbf7e;
+  --bg-light: #f6f6f6;
+  --bg-white: #ffffff;
+  --text-dark: #111111;
+  --text-light: #4b5563;
+  --border-color: #e5e7eb;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.14);
+}
+
+html, body {
+  height: 100%;
+  background-color: var(--bg-light);
+}
+
+body {
+  color: var(--text-dark);
+  background-color: var(--bg-light);
+}
+
+#app {
+  height: 100vh;
+}
+
+/* Scrollbar estilizada */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* Links */
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--primary-dark);
+}
+
+/* Botões base */
+button {
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+  font-family: inherit;
+  font-weight: 500;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* Inputs */
+input, textarea, select {
+  font-family: inherit;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  padding: 10px 12px;
+  transition: var(--transition);
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(209, 78, 9, 0.1);
+}
+
+/* Containers e Cards */
+.card {
+  background: var(--bg-white);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  :root {
+    font-size: 14px;
+  }
 }
