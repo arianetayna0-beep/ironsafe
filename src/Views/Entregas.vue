@@ -71,7 +71,7 @@
             <tr v-for="h in historico" :key="h.id">
               <td>{{ new Date(h.created_at).toLocaleDateString() }}</td>
               <td>{{ h.funcionario }}</td>
-              <td>{{ h.epis_novo?.nome || 'EPI não encontrado' }}</td>
+              <td>{{ h.epis?.nome || 'EPI não encontrado' }}</td>
               <td><span class="badge-qtd-out">{{ h.quantidade_entregue }}</span></td>
             </tr>
           </tbody>
@@ -106,19 +106,21 @@ const saldoDisponivel = computed(() => {
 // --- CARREGAR DADOS ---
 const carregarTudo = async () => {
   try {
-    // Busca EPIs da epis_novo
-    const { data: dEpis } = await supabase.from("epis_novo").select("*").order("nome");
+    // Busca EPIs da tabela epis
+    const { data: dEpis, error: errEpis } = await supabase.from("epis").select("*").order("nome");
+    if (errEpis) throw errEpis;
     listaEpis.value = dEpis || [];
 
     // Busca Funcionários
     const { data: dFunc } = await supabase.from("funcionarios").select("*").order("nome");
     listaFuncionarios.value = dFunc || [];
 
-    // Busca Histórico (com relação à epis_novo)
-    const { data: dHist } = await supabase
+    // Busca Histórico (com relação à tabela epis)
+    const { data: dHist, error: errHist } = await supabase
       .from("entregas")
-      .select("*, epis_novo(nome)")
+      .select("*, epis(nome)")
       .order("created_at", { ascending: false });
+    if (errHist) throw errHist;
     historico.value = dHist || [];
 
   } catch (e) {
@@ -138,10 +140,10 @@ const registrarEntrega = async () => {
 
     if (errInsert) throw errInsert;
 
-    // 2. Diminui a quantidade na tabela 'epis_novo' manualmente
+    // 2. Diminui a quantidade na tabela 'epis' manualmente
     const novaQtd = saldoDisponivel.value - form.qtd;
     const { error: errUpdate } = await supabase
-      .from("epis_novo")
+      .from("epis")
       .update({ quantidade: novaQtd })
       .eq("id", form.epi_id);
 
@@ -163,122 +165,134 @@ onMounted(carregarTudo);
 </script>
 
 <style scoped>
+:root {
+  --primary-orange: #f18f3c;
+  --btn-edit: #ffcc80;
+  --btn-dark: #6c757d;
+  --bg-site: #f5f5f5;
+  --text-main: #333333;
+}
+
 .layout-container {
-  background: #f4f5f7;
-  min-height: 100vh;
-  padding: 2rem 1rem;
-  font-family: sans-serif;
-  display: flex;
-  justify-content: center;
-}
-.content {
-  width: min(100%, 900px);
-  margin: 0 auto;
+  background: var(--bg-site);
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
 }
-.card-form, .card-table {
-  background: white;
-  border-radius: 20px;
-  padding: 2rem;
-  box-shadow: 0 22px 50px rgba(15, 23, 42, 0.08);
-  border: 1px solid rgba(148, 163, 184, 0.18);
+
+.header-section {
+  text-align: center;
+  margin-bottom: 30px;
 }
-.card-form {
-  position: relative;
+
+.header-section h1 {
+  color: var(--text-main);
 }
-.card-form::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 80px;
-  height: 80px;
-  background: radial-gradient(circle, rgba(241,143,60,0.18) 0%, transparent 70%);
-  border-bottom-left-radius: 40px;
-}
-.form-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 1rem;
-}
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-.form-group label {
-  font-weight: 700;
+
+.header-section p {
   color: #475569;
 }
+
+.content {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.card-form, .card-table {
+  background: #ffffff;
+  border-radius: 15px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+}
+
+.main-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
 .form-group input,
 .form-group select {
-  padding: 0.95rem 1rem;
-  border: 1px solid #d6d9e6;
-  border-radius: 14px;
-  background: #f8fafc;
-  color: #111111;
+  padding: 12px;
+  border: 1px solid #ced4da;
+  border-radius: 10px;
+  background: #ffffff;
+  color: var(--text-main);
 }
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.95rem 1.6rem;
-  border-radius: 14px;
-  border: none;
-  cursor: pointer;
-  font-weight: 700;
-  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: var(--primary-orange);
+  box-shadow: 0 0 0 3px rgba(241, 143, 60, 0.12);
 }
-.btn-primary {
-  background: var(--primary);
-  color: #111111;
-  width: 100%;
-  box-shadow: 0 16px 30px rgba(241, 143, 60, 0.15);
+
+.action-bar {
+  display: flex;
+  gap: 12px;
 }
-.btn-primary:hover {
-  background: var(--primary-dark);
-  color: #ffffff;
-  transform: translateY(-1px);
-}
-.btn-primary:disabled {
-  background: #cbd5e1;
-  cursor: not-allowed;
-}
+
 .styled-table {
   width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  margin-top: 1rem;
-  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+  border-collapse: collapse;
 }
-.styled-table thead {
-  background: #f8fafc;
-}
-.styled-table th,
-.styled-table td {
-  padding: 1rem 1.2rem;
+
+.styled-table th, .styled-table td {
+  padding: 12px;
   text-align: left;
   border-bottom: 1px solid #e2e8f0;
 }
-.styled-table tbody tr:nth-child(even) {
-  background: #f8fafc;
-}
-.badge-qtd-out {
-  background: rgba(241, 143, 60, 0.12);
-  color: #a45100;
-  padding: 0.3rem 0.75rem;
-  border-radius: 999px;
+
+.btn {
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
   font-weight: 700;
 }
-.error-msg {
-  color: #b91c1c;
+
+.btn-primary { background: var(--btn-dark); color: white; }
+.btn-primary:hover { background: #525962; }
+.btn-outline { background: #f8fafc; color: var(--text-main); border: 1px solid #d1d5db; }
+
+.btn-action {
+  padding: 6px 12px;
+  margin: 0 4px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
   font-weight: 700;
-  margin-top: 1rem;
 }
-@media (max-width: 768px) {
-  .layout-container { padding: 1.5rem 1rem; }
+
+.btn-action.edit { background: var(--btn-edit); color: #92400e; }
+.btn-action.delete { background: var(--btn-dark); color: #ffffff; }
+
+@media (max-width: 600px) {
+  .form-row { flex-direction: column; }
 }
 </style>

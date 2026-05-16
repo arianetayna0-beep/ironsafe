@@ -120,109 +120,111 @@ onMounted(listar)
 </script>
 
 <style scoped>
-.pagina { 
-  padding: 2.5rem 1rem; 
-  display: flex; 
-  justify-content: center; 
-  background: #f5f5f5; /* Cinza claro neutro da imagem */
-  min-height: 100vh; 
+.pagina {
+  padding: 2.5rem 1rem;
+  display: flex;
+  justify-content: center;
+  background: #edf2f7;
+  min-height: 100vh;
   font-family: 'Inter', sans-serif;
 }
 
-.card { 
-  background: #ffffff; /* Branco puro */
-  padding: 2rem; 
-  border-radius: 12px; 
-  width: 100%; 
-  max-width: 900px; /* Aumentado para acomodar bem a tabela */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); 
-  border: 1px solid #e0e0e0;
-}
-
-form { 
-  display: flex; 
-  flex-direction: column; 
-  gap: 1.2rem; 
-  margin-bottom: 2.5rem; 
-}
-
-input { 
-  padding: 0.8rem 1rem; 
-  border: 1px solid #ced4da; 
-  border-radius: 8px; 
+.card {
   background: #ffffff;
+  padding: 2rem;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 900px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-bottom: 2.5rem;
+}
+
+input {
+  padding: 0.8rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #f8fafc;
+  color: #1f2937;
   font-size: 0.95rem;
   transition: border-color 0.2s;
 }
 
 input:focus {
   outline: none;
-  border-color: #f18f3c; /* Laranja no destaque */
+  border-color: #f18f3c;
+  box-shadow: 0 0 0 3px rgba(241, 143, 60, 0.12);
 }
 
-.botoes-form { 
-  display: flex; 
-  gap: 12px; 
+.botoes-form {
+  display: flex;
+  gap: 12px;
 }
 
-button { 
-  cursor: pointer; 
-  padding: 0.8rem 1.5rem; 
-  border-radius: 8px; 
-  border: none; 
-  font-weight: 600; 
+button {
+  cursor: pointer;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
   font-size: 0.9rem;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, transform 0.2s ease;
 }
 
-/* Botão Principal em Cinza Grafite */
-.btn-salvar { 
-  background: #6c757d; 
-  color: white; 
-  flex: 1; 
+.btn-salvar {
+  background: #334155;
+  color: white;
+  flex: 1;
 }
 
-/* Botão Cancelar em Cinza mais suave */
-.btn-cancelar { 
-  background: #adb5bd; 
-  color: white; 
+.btn-salvar:hover {
+  transform: translateY(-1px);
 }
 
-/* Estilo da Tabela */
-.tabela { 
-  width: 100%; 
-  border-collapse: collapse; 
-  margin-top: 1rem; 
+.btn-cancelar {
+  background: #f8fafc;
+  color: #1f2937;
+  border: 1px solid #d1d5db;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
 }
 
 .tabela th {
-  color: #888888;
-  font-size: 0.75rem;
+  color: #64748b;
+  font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   padding: 12px;
-  border-bottom: 2px solid #f2f2f2;
+  border-bottom: 2px solid #e2e8f0;
   text-align: left;
 }
 
-.tabela td { 
-  border-bottom: 1px solid #f2f2f2; 
-  padding: 14px 12px; 
-  color: #333333;
+.tabela td {
+  border-bottom: 1px solid #e2e8f0;
+  padding: 14px 12px;
+  color: #1f2937;
   font-size: 0.95rem;
 }
 
-/* Botão Editar (Laranja Pastel) */
-.btn-edit { 
-  background: #ffcc80; 
-  color: #855000; 
-  margin-right: 5px; 
+.btn-edit {
+  background: #ffcc80;
+  color: #92400e;
+  margin-right: 5px;
 }
 
-/* Botão Excluir (Cinza Grafite para manter o padrão) */
-.btn-del { 
-  background: #6c757d; 
-  color: white; 
+.btn-del {
+  background: #334155;
+  color: white;
 }
 
 button:hover {

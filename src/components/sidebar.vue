@@ -3,8 +3,7 @@
     <aside class="sidebar">
       <!-- Logo/Título do sistema -->
       <h1 class="logo">
-        <i class="fas fa-shield-alt"></i>
-        Sistema EPI
+        <img class="logo-img" src="../assets/logo.png" alt="logo do site">
       </h1>
       <!-- Menu de navegação -->
     <router-link to="/dashboard/cadastro">Cadastro de EPIs</router-link>
@@ -58,7 +57,7 @@ function logout() {
 
 .sidebar {
   width: 260px;
-  background: linear-gradient(135deg, #f18f3c 0%, #d16b27 100%);
+  background: linear-gradient(135deg, #f18f3c 0%, #d16b27d4 100%);
   color: #FFFFFF;
   display: flex;
   flex-direction: column;
@@ -98,6 +97,11 @@ function logout() {
   padding: 0 15px;
   flex-shrink: 0;
 }
+
+.logo-img{
+  width: 20rem;
+}
+
 
 .logo i {
   font-size: 28px;

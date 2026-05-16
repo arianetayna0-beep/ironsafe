@@ -183,18 +183,35 @@ onMounted(carregar);
 </script>
 
 <style scoped>
+:root {
+  --primary-orange: #f18f3c;
+  --btn-edit: #ffcc80;
+  --btn-dark: #6c757d;
+  --bg-site: #f5f5f5;
+  --text-main: #333333;
+}
+
 .layout-container {
-  background-color: #f8fafc;
+  background: var(--bg-site);
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
   padding: 20px;
+  font-family: 'Inter', sans-serif;
 }
 
 .header-section {
   text-align: center;
   margin-bottom: 30px;
+}
+
+.header-section h1 {
+  color: var(--text-main);
+}
+
+.header-section p {
+  color: #475569;
 }
 
 .content {
@@ -207,10 +224,10 @@ onMounted(carregar);
 
 .card-form, .card-table {
   background: #ffffff;
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 15px;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
 }
 
 .main-form {
@@ -231,10 +248,24 @@ onMounted(carregar);
   gap: 8px;
 }
 
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
 .form-group input {
-  padding: 10px;
-  border: 1px solid #e2e8f0;
-  border-radius: 6px;
+  padding: 12px;
+  border: 1px solid #ced4da;
+  border-radius: 10px;
+  background: #ffffff;
+  color: var(--text-main);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary-orange);
+  box-shadow: 0 0 0 3px rgba(241, 143, 60, 0.12);
 }
 
 .action-bar {
@@ -255,25 +286,27 @@ onMounted(carregar);
 
 .btn {
   padding: 10px 18px;
-  border-radius: 6px;
+  border-radius: 10px;
   cursor: pointer;
   border: none;
-  font-weight: 500;
+  font-weight: 700;
 }
 
-.btn-primary { background: #2563eb; color: white; }
-.btn-outline { background: #f1f5f9; color: #475569; }
+.btn-primary { background: var(--btn-dark); color: white; }
+.btn-primary:hover { background: #525962; }
+.btn-outline { background: #f8fafc; color: var(--text-main); border: 1px solid #d1d5db; }
 
 .btn-action {
   padding: 6px 12px;
   margin: 0 4px;
-  border-radius: 4px;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
+  font-weight: 700;
 }
 
-.edit { background: #fef3c7; color: #92400e; }
-.delete { background: #fee2e2; color: #b91c1c; }
+.btn-action.edit { background: var(--btn-edit); color: #92400e; }
+.btn-action.delete { background: var(--btn-dark); color: #ffffff; }
 
 @media (max-width: 600px) {
   .form-row { flex-direction: column; }

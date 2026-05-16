@@ -18,6 +18,12 @@
   --border-color: #e5e7eb;
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.14);
+  --btn-dark: #6c757d;
+  --btn-edit: #ffcc80;
+  --btn-outline-bg: #f8fafc;
+  --btn-outline-border: #d1d5db;
+  --bg-site: #f5f5f5;
+  --text-main: #333333;
 }
 
 html, body {
