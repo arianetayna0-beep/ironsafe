@@ -3,7 +3,6 @@
         <img src="../assets/logo.png" alt="Logo" class="logo">
         <div class="header-links">
             <router-link class="link" to="/">Início</router-link>
-            <router-link class="link" to="/Sobre">Sobre</router-link>
         </div>
         <div class="buttons">
             <button class="login-button" @click="router.push('/Login')">Entrar</button>

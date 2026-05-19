@@ -1,12 +1,12 @@
 
 import { mount } from '@vue/test-utils'
 import { describe, it, expect } from 'vitest'
-import CadastroFuncionarioView from '../views/CadastroFuncionarioView.vue'
+import Funcionario from '../Views/Funcionario.vue'
 describe('CadastroFuncionarioView', () => {
 
 it('deve mostrar erro quando o nome não for preenchido', async () => {
 
-const wrapper = mount(CadastroFuncionarioView)
+const wrapper = mount(Funcionario)
 
 await wrapper.find('form').trigger('submit')
 expect(wrapper.text()).toContain(

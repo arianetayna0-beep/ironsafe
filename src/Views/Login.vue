@@ -1,4 +1,7 @@
 <template>
+    <div class="background"> 
+        <img class="img-login" src="../assets/login.jpg" alt="">
+    </div>
     <div class = "container">
     <main class="auth-page">
         <form @submit.prevent="fazerLogin">
@@ -18,7 +21,7 @@
 </template>
  
 <script setup>
-import { useSupabase } from '../composables/UseSupabase.js'
+import { useSupabase } from '../composables/useSupabase.js'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
  
@@ -61,9 +64,20 @@ async function fazerLogin() {
     border-radius: 6px;
     background-color: #ccc;
 
+} 
+.background {
+    display: flex;
+   
 }
- .container {
-    background-image: url("../assets/login.jpg");
+.img-login {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+   
+    
+}
+.container {
+    /* background-image: url("../assets/login.jpg"); */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

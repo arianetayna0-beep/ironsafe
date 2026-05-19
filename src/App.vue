@@ -1,6 +1,6 @@
+<script setup>
+</script>
+
 <template>
-    <div>
-        <AppHeader />
-        <router-view />
-    </div>
+  <router-view />
 </template>

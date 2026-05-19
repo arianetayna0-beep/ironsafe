@@ -14,9 +14,9 @@
             <!-- Selecionar Funcionário -->
             <div class="form-group">
               <label>Funcionário</label>
-              <select v-model="form.funcionario" required>
+              <select v-model="form.funcionario_id" required>
                 <option value="">Selecione o funcionário...</option>
-                <option v-for="f in listaFuncionarios" :key="f.id" :value="f.nome">
+                <option v-for="f in listaFuncionarios" :key="f.id" :value="f.id">
                   {{ f.nome }}
                 </option>
               </select>
@@ -70,7 +70,7 @@
           <tbody>
             <tr v-for="h in historico" :key="h.id">
               <td>{{ new Date(h.created_at).toLocaleDateString() }}</td>
-              <td>{{ h.funcionario }}</td>
+              <td>{{ h.funcionarios?.nome || 'Não informado' }}</td>
               <td>{{ h.epis?.nome || 'EPI não encontrado' }}</td>
               <td><span class="badge-qtd-out">{{ h.quantidade_entregue }}</span></td>
             </tr>
@@ -83,7 +83,7 @@
 
 <script setup>
 import { ref, reactive, onMounted, computed } from "vue";
-import { useSupabase } from "../composables/UseSupabase";
+import { useSupabase } from "../composables/useSupabase";
 
 const { supabase } = useSupabase();
 
@@ -92,7 +92,7 @@ const listaEpis = ref([]);
 const listaFuncionarios = ref([]);
 const historico = ref([]);
 const form = reactive({
-  funcionario: "",
+  funcionario_id: "",
   epi_id: "",
   qtd: 1
 });
@@ -115,10 +115,10 @@ const carregarTudo = async () => {
     const { data: dFunc } = await supabase.from("funcionarios").select("*").order("nome");
     listaFuncionarios.value = dFunc || [];
 
-    // Busca Histórico (com relação à tabela epis)
+    // Busca Histórico (com relação às tabelas de relacionamento)
     const { data: dHist, error: errHist } = await supabase
       .from("entregas")
-      .select("*, epis(nome)")
+      .select("*, epis(nome), funcionarios(nome)")
       .order("created_at", { ascending: false });
     if (errHist) throw errHist;
     historico.value = dHist || [];
@@ -133,7 +133,7 @@ const registrarEntrega = async () => {
   try {
     // 1. Salva a entrega na tabela 'entregas'
     const { error: errInsert } = await supabase.from("entregas").insert([{
-      funcionario: form.funcionario,
+      funcionario_id: form.funcionario_id,
       epi_id: form.epi_id,
       quantidade_entregue: form.qtd
     }]);
@@ -151,7 +151,7 @@ const registrarEntrega = async () => {
 
     // 3. Limpa e atualiza
     alert("Entrega confirmada e estoque atualizado!");
-    form.funcionario = "";
+    form.funcionario_id = "";
     form.epi_id = "";
     form.qtd = 1;
     await carregarTudo();

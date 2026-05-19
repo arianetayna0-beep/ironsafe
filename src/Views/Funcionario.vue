@@ -44,6 +44,16 @@
                 required
               />
             </div>
+
+            <div class="form-group">
+              <label>Senha</label>
+              <input
+                v-model="form.senha"
+                type="password"
+                placeholder="Digite a senha"
+                required
+              />
+            </div>
           </div>
 
           <div class="action-bar">
@@ -98,7 +108,7 @@
 
 <script setup>
 import { ref, reactive, onMounted } from "vue";
-import { useSupabase } from "../composables/UseSupabase";
+import { useSupabase } from "../composables/useSupabase";
 const { supabase } = useSupabase();
 
 const funcionarios = ref([]);
@@ -107,7 +117,8 @@ const editandoId = ref(null);
 const form = reactive({
   nome: "",
   cpf: "",
-  email: ""
+  email: "",
+  senha: ""
 });
 
 const carregar = async () => {
@@ -127,7 +138,8 @@ const salvar = async () => {
   const payload = {
     nome: form.nome,
     cpf: form.cpf,
-    email: form.email
+      email: form.email,
+      senha: form.senha
   };
 
   if (editandoId.value) {
@@ -154,7 +166,8 @@ const prepararEdicao = (f) => {
   Object.assign(form, {
     nome: f.nome,
     cpf: f.cpf,
-    email: f.email
+    email: f.email,
+    senha: f.senha || ''
   });
 };
 
@@ -175,7 +188,8 @@ const cancelarEdicao = () => {
   Object.assign(form, {
     nome: "",
     cpf: "",
-    email: ""
+    email: "",
+    senha: ""
   });
 };
 
