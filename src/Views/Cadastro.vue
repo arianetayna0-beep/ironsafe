@@ -139,11 +139,16 @@ onMounted(carregar);
 }
 
 .layout-container {
-  background: var(--bg-site);
   display: flex;
+  background-image: url('../assets/cadastroepi.jpg');
+  background-size: cover;
+  background-position: 40% center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  min-height: 100vh;
   padding: 20px;
   font-family: 'Inter', sans-serif;
 }
@@ -162,14 +167,20 @@ onMounted(carregar);
   display: flex;
   flex-direction: column;
   gap: 30px;
+  align-items: center;
+  padding: 0 20px;
 }
 
 .card-form, .card-table {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.60);
+  backdrop-filter: blur(2px);
   border-radius: 15px;
-  border: 1px solid rgba(148, 163, 184, 0.18);
+  border: 1px solid rgba(148, 163, 184, 0.12);
   padding: 24px;
   box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .main-form { display: flex; flex-direction: column; gap: 20px; }
@@ -194,4 +205,7 @@ onMounted(carregar);
 .btn-action.delete { background: var(--btn-dark, #6c757d); color: #ffffff; }
 
 @media (max-width: 600px) { .form-row { flex-direction: column; } }
+@media (max-width: 900px) {
+  .card-form { margin-left: 0; }
+}
 </style>

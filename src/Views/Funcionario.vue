@@ -2,7 +2,6 @@
   <div class="layout-container">
     <header class="header-section">
       <h1>Cadastro de Funcionários</h1>
-      <p>Gerencie os colaboradores cadastrados no sistema.</p>
     </header>
 
     <main class="content">
@@ -206,11 +205,12 @@ onMounted(carregar);
 }
 
 .layout-container {
-  background: var(--bg-site);
+  background: linear-gradient(rgba(245, 245, 245, 0.30), rgba(245, 245, 245, 0.30)), url("../assets/login.jpg") center/cover no-repeat;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  min-height: 100vh;
   padding: 20px;
   font-family: 'Inter', sans-serif;
 }
@@ -237,9 +237,10 @@ onMounted(carregar);
 }
 
 .card-form, .card-table {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.60);
+  backdrop-filter: blur(2px);
   border-radius: 15px;
-  border: 1px solid rgba(148, 163, 184, 0.18);
+  border: 1px solid rgba(148, 163, 184, 0.12);
   padding: 24px;
   box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
 }

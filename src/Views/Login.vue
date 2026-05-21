@@ -1,22 +1,22 @@
 <template>
-    <div class="background"> 
+    <div class="background">
         <img class="img-login" src="../assets/login.jpg" alt="">
     </div>
     <div class = "container">
-    <main class="auth-page">
-        <form @submit.prevent="fazerLogin">
-            <div class="input-group">
-                <label for="email">Email:</label>
-                <input class="input" type="email" id="email" v-model="email" required />
-            </div>
-            <div class="input-group">
-                <label for="password">Senha:</label>
-                <input class="input" type="password" id="password" v-model="password" required />
-            </div>
-            <button class="login-button" type="submit" :disabled="loading">Entrar</button>
-            <p v-if="erro" class="error">{{ erro }}</p>
-        </form>
-    </main>
+        <main class="auth-page">
+            <form @submit.prevent="fazerLogin">
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input class="input" type="email" id="email" v-model="email" required />
+                </div>
+                <div class="input-group">
+                    <label for="password">Senha:</label>
+                    <input class="input" type="password" id="password" v-model="password" required />
+                </div>
+                <button class="login-button" type="submit" :disabled="loading">Entrar</button>
+                <p v-if="erro" class="error">{{ erro }}</p>
+            </form>
+        </main>
     </div>
 </template>
  
@@ -57,54 +57,56 @@ async function fazerLogin() {
  
 <style scoped>
 .auth-page {
-    max-width: px;
-    margin: 50px auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    background-color: #ccc;
-
-} 
-.background {
-    display: flex;
-   
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 32px;
+    border-radius: 16px;
+    background-color: rgba(255, 255, 255, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(10px);
 }
+
+.background {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+}
+
 .img-login {
     width: 100%;
     height: 100vh;
     object-fit: cover;
-   
-    
 }
+
 .container {
-    /* background-image: url("../assets/login.jpg"); */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
 }
 
-.input-group{
+.input-group {
     display: flex;
     flex-direction: column;
-    width: 20rem;
-    height: 4rem;
-    opacity: 0.5;
+    width: 100%;
+    max-width: 420px;
+    margin-bottom: 16px;
 }
 
-.input{
-    width: 20rem;
-    height: 2rem;
+.input {
+    width: 100%;
+    height: 2.5rem;
     border-radius: 0.5rem;
-    border: 5px;
+    border: 1px solid #ccc;
+    padding: 0 12px;
 }
 
-.login-button{
-    width: 20rem;
-    height: 2rem;
+.login-button {
+    width: 100%;
+    height: 2.5rem;
     border-radius: 0.5rem;
     background-color: rgb(83, 86, 87);
     border: none;
