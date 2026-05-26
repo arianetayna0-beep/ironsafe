@@ -51,25 +51,35 @@ function logout() {
 
 .shell {
   display: flex;
-  background-color: #f8f9fa;
+  background-color: transparent;
   min-height: 100vh;
 }
 
+
 .sidebar {
   width: 260px;
-  background: #f5f5f5;
-  color: #333333;
+
+  background: rgba(255,255,255,0.25);
+
+  color: white;
   display: flex;
   flex-direction: column;
   position: fixed;
   height: 100vh;
   left: 0;
   top: 0;
-  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+
+  border-right: 1px solid rgba(255,255,255,0.25);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  box-shadow: 2px 0 12px rgba(0,0,0,0.15);
   z-index: 1000;
   overflow-y: auto;
   padding: 20px 0;
 }
+
 
 .sidebar::-webkit-scrollbar {
   width: 6px;
@@ -87,7 +97,7 @@ function logout() {
 .logo {
   font-size: 22px;
   font-weight: 700;
-  color: #333333;
+  color: white;
   margin-bottom: 40px;
   text-align: center;
   display: flex;
@@ -112,7 +122,8 @@ a, button {
   display: flex;
   align-items: center;
   padding: 12px 18px;
-  color: #333333;
+  color: white;
+  text-shadow:0 2px 8px rgba(0,0,0,.35);
   text-decoration: none;
   border-radius: 8px;
   font-size: 15px;
@@ -134,20 +145,27 @@ a, button {
 }
 
 a:hover, button:hover {
-  background-color: rgba(0, 0, 0, 0.06);
+  background-color: rgba(255,255,255,.08);
   transform: translateX(6px);
   box-shadow: 0 6px 18px rgba(0,0,0,0.04);
 }
 
 a.router-link-active {
-  background-color: rgba(0,0,0,0.06);
-  border-left: 4px solid #6c757d;
+  background: rgba(255,255,255,.08);
+
+  border-left: 4px solid #f18f3c;
+
   padding-left: 14px;
+
   font-weight: 700;
-  box-shadow: inset 6px 0 12px rgba(0,0,0,0.02);
+
   transform: translateX(2px);
-  color: #6c757d;
+
+  color: white;
+
+  box-shadow: inset 6px 0 12px rgba(255,255,255,.05);
 }
+
 
 button {
   margin-top: auto;
@@ -172,7 +190,7 @@ button:hover {
   flex: 1;
   margin-left: 260px;
   padding: 30px;
-  background-color: #f8f9fa;
+  background-color: transparent;
 }
 
 /* Tablet */
@@ -223,10 +241,20 @@ button:hover {
   }
 
   a.router-link-active {
-    border-left: none;
-    border-bottom: 3px solid #FFFFFF;
-    padding-left: 15px;
-  }
+  background: rgba(255,255,255,.08);
+
+  border-left: 4px solid #f18f3c;
+
+  padding-left: 14px;
+
+  font-weight: 700;
+
+  transform: translateX(2px);
+
+  color: white;
+
+  box-shadow: inset 6px 0 12px rgba(255,255,255,.05);
+}
 
   .conteudo {
     margin-left: 0;

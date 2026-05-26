@@ -1,39 +1,41 @@
 <template>
-  <div class="layout-container">
-    <header class="header-section">
-      <h1>Gerenciamento de EPIs</h1>
-      <p>Cadastre produtos e defina o saldo inicial.</p>
-    </header>
+ <div class="layout-container">
 
-    <main class="content">
-      <section class="card-form">
-        <form @submit.prevent="salvar" class="main-form">
-          <div class="form-row">
-            <div class="form-group">
-              <label>Nome do EPI</label>
-              <input v-model="form.nome" type="text" required placeholder="Ex: Capacete" />
+
+        <header class="header-section">
+          <h1>Gerenciamento de EPIs</h1>
+          <p>Cadastre produtos e defina o saldo inicial.</p>
+        </header>
+      
+      <main class="content">
+        <section class="card-form">
+          <form @submit.prevent="salvar" class="main-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Nome do EPI</label>
+                <input v-model="form.nome" type="text" required placeholder="Ex: Capacete" />
+              </div>
+              <div class="form-group">
+                <label>Quantidade em Estoque</label>
+                <input v-model="form.quantidade" type="number" min="0" required />
+              </div>
             </div>
-            <div class="form-group">
-              <label>Quantidade em Estoque</label>
-              <input v-model="form.quantidade" type="number" min="0" required />
+            
+            <div class="action-bar">
+              <button type="submit" class="btn btn-primary">
+                {{ editandoId ? 'Salvar Alterações' : 'Cadastrar' }}
+              </button>
+              <button v-if="editandoId" @click="cancelar" type="button" class="btn btn-outline">Cancelar</button>
             </div>
-          </div>
-
-          <div class="action-bar">
-            <button type="submit" class="btn btn-primary">
-              {{ editandoId ? 'Salvar Alterações' : 'Cadastrar' }}
-            </button>
-            <button v-if="editandoId" @click="cancelar" type="button" class="btn btn-outline">Cancelar</button>
-          </div>
-        </form>
-      </section>
-
-      <section class="card-table">
-        <h3>Últimos EPIs Cadastrados</h3>
-        <table class="styled-table">
-          <thead>
-            <tr>
-              <th>EPI</th>
+          </form>
+        </section>
+        
+        <section class="card-table">
+          <h3>Últimos EPIs Cadastrados</h3>
+          <table class="styled-table">
+            <thead>
+              <tr>
+                <th>EPI</th>
               <th>Quantidade</th>
               <th class="text-center">Ações</th>
             </tr>
@@ -138,50 +140,87 @@ onMounted(carregar);
   --text-main: #333333;
 }
 
-.layout-container {
-  display: flex;
-  background-image: url('../assets/cadastroepi.jpg');
-  background-size: cover;
-  background-position: 40% center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  min-height: 100vh;
-  padding: 20px;
-  font-family: 'Inter', sans-serif;
+
+.layout-container{
+  max-width:1200px;
+  margin:0 auto;
+  padding:30px;
+
+  min-height:100vh;
+
+  display:flex;
+  flex-direction:column;
+
+  font-family:'Inter',sans-serif;
+
+  position:relative;
+  z-index:1;
 }
+
+.layout-container::before{
+content:"";
+
+position:fixed;
+inset:0;
+
+background:
+linear-gradient(
+rgba(12,30,50,.55),
+rgba(12,30,50,.35)
+),
+url("../assets/login.jpg");
+
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+
+z-index:-1;
+}
+
 
 .header-section {
   text-align: center;
   margin-bottom: 30px;
 }
 
-.header-section h1 { color: var(--text-main); }
-.header-section p { color: #475569; }
-
-.content {
-  width: 100%;
-  max-width: 900px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  align-items: center;
-  padding: 0 20px;
+.header-section h1 {
+  color: white;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
 }
 
-.card-form, .card-table {
-  background: rgba(255, 255, 255, 0.60);
-  backdrop-filter: blur(2px);
-  border-radius: 15px;
-  border: 1px solid rgba(148, 163, 184, 0.12);
-  padding: 24px;
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
+.header-section p {
+  color: white;
+  text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
 }
+
+.content{
+  width:100%;
+
+  display:flex;
+  flex-direction:column;
+
+  gap:30px;
+}
+
+
+.card-form,
+.card-table{
+    background: rgba(255,255,255,.28);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border:1px solid rgba(255,255,255,.45);
+
+    border-radius:20px;
+
+    box-shadow:0 10px 35px rgba(0,0,0,.15);
+
+    padding:24px;
+
+    width:100%;
+}
+
 
 .main-form { display: flex; flex-direction: column; gap: 20px; }
 .form-row { display: flex; gap: 20px; }
@@ -205,7 +244,4 @@ onMounted(carregar);
 .btn-action.delete { background: var(--btn-dark, #6c757d); color: #ffffff; }
 
 @media (max-width: 600px) { .form-row { flex-direction: column; } }
-@media (max-width: 900px) {
-  .card-form { margin-left: 0; }
-}
 </style>

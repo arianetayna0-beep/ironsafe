@@ -1,22 +1,21 @@
 <template>
     <div class="background">
-        <img class="img-login" src="../assets/login.jpg" alt="">
-    </div>
-    <div class = "container">
-        <main class="auth-page">
-            <form @submit.prevent="fazerLogin">
-                <div class="input-group">
-                    <label for="email">Email:</label>
-                    <input class="input" type="email" id="email" v-model="email" required />
-                </div>
-                <div class="input-group">
-                    <label for="password">Senha:</label>
-                    <input class="input" type="password" id="password" v-model="password" required />
-                </div>
-                <button class="login-button" type="submit" :disabled="loading">Entrar</button>
-                <p v-if="erro" class="error">{{ erro }}</p>
-            </form>
-        </main>
+        <div class = "container">
+            <main class="auth-page">
+                <form @submit.prevent="fazerLogin">
+                    <div class="input-group">
+                        <label for="email">Email:</label>
+                        <input class="input" type="email" id="email" v-model="email" required />
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Senha:</label>
+                        <input class="input" type="password" id="password" v-model="password" required />
+                    </div>
+                    <button class="login-button" type="submit" :disabled="loading">Entrar</button>
+                    <p v-if="erro" class="error">{{ erro }}</p>
+                </form>
+            </main>
+        </div>
     </div>
 </template>
  
@@ -62,16 +61,15 @@ async function fazerLogin() {
     margin: 0 auto;
     padding: 32px;
     border-radius: 16px;
-    background-color: rgba(255, 255, 255, 0.35);
     border: 1px solid rgba(255, 255, 255, 0.55);
     box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
     backdrop-filter: blur(10px);
 }
 
 .background {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
+    background-image: url(../assets/login.jpg);
+    background-size: cover;
+    background-position: center;
 }
 
 .img-login {

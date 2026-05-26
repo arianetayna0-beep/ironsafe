@@ -1,84 +1,86 @@
 <template>
   <div class="layout-container">
-    <header class="header-section">
-      <h1>Cadastro de Funcionários</h1>
-    </header>
 
-    <main class="content">
-      <section class="card-form">
-        <div class="card-header">
-          <h3>{{ editandoId ? 'Alterar Registro' : 'Novo Funcionário' }}</h3>
-        </div>
-
-        <form @submit.prevent="salvar" class="main-form">
-          <div class="form-row">
-            <div class="form-group">
-              <label>Nome Completo</label>
-              <input
+      <header class="header-section">
+        <h1>Cadastro de Funcionários</h1>
+        <p>Gerencie os colaboradores cadastrados no sistema.</p>
+      </header>
+      
+      <main class="content">
+        <section class="card-form">
+          <div class="card-header">
+            <h3>{{ editandoId ? 'Alterar Registro' : 'Novo Funcionário' }}</h3>
+          </div>
+          
+          <form @submit.prevent="salvar" class="main-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Nome Completo</label>
+                <input
                 v-model="form.nome"
                 type="text"
                 placeholder="Digite o nome"
                 required
-              />
+                />
             </div>
-
+            
             <div class="form-group">
               <label>CPF</label>
               <input
-                v-model="form.cpf"
-                type="text"
-                placeholder="000.000.000-00"
-                required
+              v-model="form.cpf"
+              type="text"
+              placeholder="000.000.000-00"
+              required
               />
             </div>
           </div>
-
+          
           <div class="form-row">
             <div class="form-group">
               <label>Email</label>
               <input
-                v-model="form.email"
-                type="email"
-                placeholder="email@exemplo.com"
-                required
+              v-model="form.email"
+              type="email"
+              placeholder="email@exemplo.com"
+              required
               />
             </div>
-
+            
             <div class="form-group">
               <label>Senha</label>
               <input
-                v-model="form.senha"
-                type="password"
-                placeholder="Digite a senha"
-                required
+              v-model="form.senha"
+              type="password"
+              placeholder="Digite a senha"
+              required
               />
             </div>
           </div>
-
+          
           <div class="action-bar">
             <button type="submit" class="btn btn-primary">
               {{ editandoId ? 'Atualizar Dados' : 'Cadastrar Funcionário' }}
             </button>
-
+            
             <button
-              v-if="editandoId"
-              type="button"
-              @click="cancelarEdicao"
-              class="btn btn-outline"
+            v-if="editandoId"
+            type="button"
+            @click="cancelarEdicao"
+            class="btn btn-outline"
             >
-              Cancelar
-            </button>
-          </div>
-        </form>
-      </section>
-
-      <section class="card-table">
-        <table class="styled-table">
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>CPF</th>
-              <th>Email</th>
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </section>
+    
+    <section class="card-table">
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Email</th>
               <th class="text-center">Ações</th>
             </tr>
           </thead>
@@ -88,7 +90,7 @@
               <td>{{ f.nome }}</td>
               <td>{{ f.cpf }}</td>
               <td>{{ f.email }}</td>
-
+              
               <td class="text-center">
                 <button @click="prepararEdicao(f)" class="btn-action edit">
                   Editar
@@ -204,15 +206,45 @@ onMounted(carregar);
   --text-main: #333333;
 }
 
-.layout-container {
-  background: linear-gradient(rgba(245, 245, 245, 0.30), rgba(245, 245, 245, 0.30)), url("../assets/login.jpg") center/cover no-repeat;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  min-height: 100vh;
-  padding: 20px;
-  font-family: 'Inter', sans-serif;
+
+.layout-container{
+  width:100%;
+  max-width:1200px;
+
+  margin:0 auto;
+  padding:30px;
+
+  min-height:100vh;
+
+  display:flex;
+  flex-direction:column;
+
+  position:relative;
+
+  z-index:1;
+
+  font-family:'Inter',sans-serif;
+}
+
+
+.layout-container::before{
+content:"";
+
+position:fixed;
+inset:0;
+
+background:
+linear-gradient(
+rgba(12,30,50,.55),
+rgba(12,30,50,.35)
+),
+url("../assets/login.jpg");
+
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+
+z-index:-1;
 }
 
 .header-section {
@@ -220,29 +252,49 @@ onMounted(carregar);
   margin-bottom: 30px;
 }
 
-.header-section h1 {
-  color: var(--text-main);
+.header-section h1{
+font-size:2.8rem;
+color:white;
+margin:0;
+text-shadow:0 4px 15px rgba(0,0,0,.45);
 }
 
-.header-section p {
-  color: #475569;
+.header-section p{
+margin-top:10px;
+color:white;
+font-size:1.1rem;
+text-shadow:0 2px 10px rgba(0,0,0,.45);
 }
 
 .content {
   width: 100%;
-  max-width: 900px;
+  max-width: 1100px;
   display: flex;
   flex-direction: column;
   gap: 30px;
+  margin:0 auto;
 }
 
-.card-form, .card-table {
-  background: rgba(255, 255, 255, 0.60);
-  backdrop-filter: blur(2px);
-  border-radius: 15px;
-  border: 1px solid rgba(148, 163, 184, 0.12);
-  padding: 24px;
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+
+.card-form,
+.card-table{
+   width:100%;
+}
+
+
+.card-form,
+.card-table {
+    background: rgba(255,255,255,0.35);
+
+    border-radius: 16px;
+
+    border: 1px solid rgba(255,255,255,0.55);
+
+    padding: 24px;
+
+    box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+
+    backdrop-filter: blur(10px);
 }
 
 .main-form {

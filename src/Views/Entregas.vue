@@ -78,7 +78,7 @@
         </table>
       </section>
     </main>
-  </div>
+  </div> 
 </template>
 
 <script setup>
@@ -164,7 +164,8 @@ const registrarEntrega = async () => {
 onMounted(carregarTudo);
 </script>
 
-<style scoped>
+
+ <style scoped>
 :root {
   --primary-orange: #f18f3c;
   --btn-edit: #ffcc80;
@@ -173,14 +174,41 @@ onMounted(carregarTudo);
   --text-main: #333333;
 }
 
-.layout-container {
-  background: var(--bg-site);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding: 20px;
-  font-family: 'Inter', sans-serif;
+
+.layout-container{
+  max-width:1200px;
+  margin:0 auto;
+  padding:30px;
+
+  min-height:100vh;
+
+  display:flex;
+  flex-direction:column;
+
+  position:relative;
+  z-index:1;
+
+  font-family:'Inter',sans-serif;
+}
+
+.layout-container::before{
+content:"";
+
+position:fixed;
+inset:0;
+
+background:
+linear-gradient(
+rgba(12,30,50,.55),
+rgba(12,30,50,.35)
+),
+url("../assets/login.jpg");
+
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+
+z-index:-1;
 }
 
 .header-section {
@@ -189,110 +217,142 @@ onMounted(carregarTudo);
 }
 
 .header-section h1 {
-  color: var(--text-main);
+  color: white;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.6);
 }
 
 .header-section p {
-  color: #475569;
+  color: white;
+  text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
 }
 
-.content {
-  width: 100%;
-  max-width: 900px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
+.content{
+ width:100%;
+
+ display:flex;
+ flex-direction:column;
+
+ gap:30px;
 }
 
-.card-form, .card-table {
-  background: #ffffff;
-  border-radius: 15px;
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  padding: 24px;
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+
+.card-form,
+.card-table{
+    width:100%;
+
+    background:rgba(255,255,255,.28);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.45);
+
+    border-radius:20px;
+
+    box-shadow:0 10px 35px rgba(0,0,0,.15);
+
+    padding:24px;
 }
 
 .main-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
 }
 
 .form-row {
-  display: flex;
-  gap: 20px;
+  display:flex;
+  gap:20px;
 }
 
 .form-group {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  flex:1;
+
+  display:flex;
+  flex-direction:column;
+
+  gap:8px;
 }
 
 .form-group label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-main);
+  font-size:.85rem;
+  font-weight:600;
+  color:var(--text-main);
 }
 
 .form-group input,
 .form-group select {
-  padding: 12px;
-  border: 1px solid #ced4da;
-  border-radius: 10px;
-  background: #ffffff;
-  color: var(--text-main);
+  padding:12px;
+
+  border:1px solid #ced4da;
+
+  border-radius:10px;
+
+  background:#ffffff;
+
+  color:var(--text-main);
 }
 
 .form-group input:focus,
 .form-group select:focus {
-  outline: none;
-  border-color: var(--primary-orange);
-  box-shadow: 0 0 0 3px rgba(241, 143, 60, 0.12);
+  outline:none;
+
+  border-color:var(--primary-orange);
+
+  box-shadow:0 0 0 3px rgba(241,143,60,.12);
 }
 
-.action-bar {
-  display: flex;
-  gap: 12px;
+.action-bar{
+display:flex;
+gap:12px;
 }
 
-.styled-table {
-  width: 100%;
-  border-collapse: collapse;
+.styled-table{
+width:100%;
+border-collapse:collapse;
 }
 
-.styled-table th, .styled-table td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #e2e8f0;
+.styled-table th,
+.styled-table td{
+padding:12px;
+text-align:left;
+border-bottom:1px solid #e2e8f0;
 }
 
-.btn {
-  padding: 10px 18px;
-  border-radius: 10px;
-  cursor: pointer;
-  border: none;
-  font-weight: 700;
+.btn{
+padding:10px 18px;
+border-radius:10px;
+cursor:pointer;
+border:none;
+font-weight:700;
 }
 
-.btn-primary { background: var(--btn-dark); color: white; }
-.btn-primary:hover { background: #525962; }
-.btn-outline { background: #f8fafc; color: var(--text-main); border: 1px solid #d1d5db; }
-
-.btn-action {
-  padding: 6px 12px;
-  margin: 0 4px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  font-weight: 700;
+.btn-primary{
+background:var(--btn-dark);
+color:white;
 }
 
-.btn-action.edit { background: var(--btn-edit); color: #92400e; }
-.btn-action.delete { background: var(--btn-dark); color: #ffffff; }
+.btn-primary:hover{
+background:#525962;
+}
 
-@media (max-width: 600px) {
-  .form-row { flex-direction: column; }
+.error-msg{
+color:red;
+font-size:14px;
+margin-top:10px;
+}
+
+.badge-qtd-out{
+background:#6c757d;
+color:white;
+padding:4px 10px;
+border-radius:10px;
+font-size:14px;
+}
+
+@media(max-width:600px){
+.form-row{
+flex-direction:column;
+}
 }
 </style>
