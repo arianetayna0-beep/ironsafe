@@ -2,14 +2,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useSupabase } from '../composables/useSupabase'
 import Home from "../Views/Home.vue"
-import Cadastro from "../Views/Cadastro.vue"
-import Login from "../Views/Login.vue"
-import Relatorio from "../Views/Relatorio.vue"  
 import Dashboard from "../Views/Dashboard.vue"
 import Entregas from "../Views/Entregas.vue"
 import Funcionario from "../Views/Funcionario.vue"
-import sidebar from '../components/sidebar.vue'
-import AppHeader from '../components/AppHeader.vue' 
 
 const { supabase } = useSupabase()
 
@@ -39,12 +34,6 @@ const routes = [
         alias: '/Relatorio',
         component: () => import('../Views/Relatorio.vue')
     },
-    {
-        path: '/sidebar',
-        name: 'Sidebar',
-        alias: '/Sidebar',
-        component: () => import('../components/sidebar.vue')
-    }, 
      {
         path: '/dashboard',
         alias: '/Dashboard',
@@ -54,12 +43,11 @@ const routes = [
         children: [
             { path: '', redirect: '/dashboard/funcionario' },
             { path: 'entregas', name: 'entregas', component: Entregas },
-            { path: 'relatorio', name: 'relatorio', component: Relatorio },
-            { path: 'cadastro', name: 'dashboard-cadastro', component: Cadastro },
+            { path: 'relatorio', name: 'relatorio', component: () => import('../Views/Relatorio.vue') },
+            { path: 'cadastro', name: 'dashboard-cadastro', component: () => import('../Views/Cadastro.vue') },
             { path: 'funcionario', name: 'funcionario', component: Funcionario }
         ]
     }
- 
 
 ]
 const router = createRouter({
